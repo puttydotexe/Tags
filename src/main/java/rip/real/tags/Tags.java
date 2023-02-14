@@ -14,11 +14,13 @@ import rip.real.tags.profile.ProfileHandler;
 import rip.real.tags.tags.TagHandler;
 import rip.real.tags.utils.menu.MenuListener;
 
-public final class Tags extends JavaPlugin {
+@Getter
+public class Tags extends JavaPlugin {
     @Getter private static Tags instance;
+    
     private MongoClient mongoClient;
-    @Getter private MongoDatabase mongoDatabase;
-    @Getter private CommandHandler commandHandler;
+    private MongoDatabase mongoDatabase;
+    private CommandHandler commandHandler;
 
     @Override
     public void onEnable() {
@@ -38,7 +40,6 @@ public final class Tags extends JavaPlugin {
 
         commandHandler = new CommandHandler(this);
         commandHandler.registerAll(this);
-
     }
 
     @Override
@@ -49,6 +50,5 @@ public final class Tags extends JavaPlugin {
         for (Player player : Bukkit.getOnlinePlayers()) {
             ProfileHandler.getInstance().getProfile(player.getUniqueId()).save();
         }
-
     }
 }
